@@ -12,7 +12,6 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -46,6 +45,7 @@ public class AppConfig {
         jpaProperties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         jpaProperties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
         jpaProperties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+        jpaProperties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
 
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
 
@@ -56,7 +56,7 @@ public class AppConfig {
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
-        return transactionManager;
+        return  transactionManager;
     }
 
 }
